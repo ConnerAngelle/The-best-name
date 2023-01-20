@@ -31,7 +31,7 @@ def calibrate():
     for i in range(CALIBRATIONS):
         distance = getDistance()
         if (DEBUG):
-        print("--Got {}cm".format(distance))
+            print("--Got {}cm".format(distance))
         distance_avg += distance
         sleep(CALIBRATION_DELAY)
 
