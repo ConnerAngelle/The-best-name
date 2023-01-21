@@ -63,6 +63,10 @@ def servoDown(status, seconds):
     pass
 
 def singleScan():
+    # 
+    pass
+
+def calculatePrcnt(d):
     pass
 
 ## overall ideas:
@@ -79,6 +83,9 @@ def singleScan():
 
 
 ## Main Program
-calibrate()
-singleScan()
+calibrate(TRIGF, ECHOF)
+calibrate(TRIGI, ECHOI)
+d = singleScan()
+calculatePrcnt(d)
+
 frontScan()
