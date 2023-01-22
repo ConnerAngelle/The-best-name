@@ -47,9 +47,13 @@ def getDistance(TRIG, ECHO):
 def frontScan():
     # will take the distance from getDistance function and 
     # compare it to a specified value
-    distances = []
     while True:
-        distances.append(getDistance())
+        distance = getDistance()
+        if(distance < 10):
+            print("Open")
+            servoDown(True, 1)
+        else:
+            print("Close")
         
     # 
     pass
@@ -59,10 +63,11 @@ def servoDown(status, seconds):
     # move servo to proper angle
     # sleep(seconds)
     # move servo back up
-    # return True 
+    # return True
+    "singleScan(True)"
     pass
 
-def singleScan():
+def singleScan(status):
     # 
     pass
 
