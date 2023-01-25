@@ -25,9 +25,6 @@ GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
 GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
 GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
 
-
-
-
 def getDistance(TRIG, ECHO):
     # will return a single distance
     GPIO.output(TRIG, GPIO.HIGH)

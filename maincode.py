@@ -13,11 +13,17 @@ SPEED_OF_SOUND = 343 # speed of sound in m/s set the RPi to the Broadcom pin lay
 GPIO.setmode(GPIO.BCM)
 
 #pins for front
+global TRIGF, ECHOF, TRIGI, ECHOI
 TRIGF = 18
 ECHOF = 27
 #pins for inside
 TRIGI = 22
 ECHOI = 25
+
+GPIO.setup(TRIGF, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
+GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
 
 # Functions
 def calibrate(TRIG, ECHO):
@@ -41,6 +47,9 @@ def getDistance(TRIG, ECHO):
     distance /= 2
     
     distance *= 100
+
+    #GPIO.cleanup()
+    
     return distance
     
 
@@ -48,15 +57,12 @@ def frontScan():
     # will take the distance from getDistance function and 
     # compare it to a specified value
     while True:
-        distance = getDistance()
+        distance = getDistance(TRIGF, ECHOF)
         if(distance < 10):
             print("Open")
             servoDown(True, 1)
         else:
             print("Close")
-        
-    # 
-    pass
 
 def servoDown(status, seconds):
     # if status == True:
@@ -68,10 +74,13 @@ def servoDown(status, seconds):
     pass
 
 def singleScan(status):
-    # 
-    pass
+    if(status == True):
+        distance = getDistance(TRIGI, ECHOI)
+        Percent = calculatePrcnt(distance)
+        #send percent to GUI
 
 def calculatePrcnt(d):
+    
     pass
 
 ## overall ideas:
@@ -90,7 +99,7 @@ def calculatePrcnt(d):
 ## Main Program
 calibrate(TRIGF, ECHOF)
 calibrate(TRIGI, ECHOI)
-d = singleScan()
+d = singleScan(True)
 calculatePrcnt(d)
 
 frontScan()
