@@ -22,6 +22,11 @@ TRIGI = 22
 ECHOI = 25
 servo = Servo(12)
 
+GPIO.setup(TRIGF, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
+GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
+
 # Functions
 def calibrate(TRIG, ECHO):
     pass
@@ -44,6 +49,9 @@ def getDistance(TRIG, ECHO):
     distance /= 2
     
     distance *= 100
+
+    GPIO.cleanup()
+    
     return distance
     
 

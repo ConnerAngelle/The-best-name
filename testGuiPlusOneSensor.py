@@ -20,6 +20,11 @@ ECHOF = 27
 TRIGI = 22
 ECHOI = 25
 
+GPIO.setup(TRIGF, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
+GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
+GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
+
 def getDistance(TRIG, ECHO):
     # will return a single distance
     GPIO.output(TRIG, GPIO.HIGH)
@@ -38,12 +43,17 @@ def getDistance(TRIG, ECHO):
     distance /= 2
     
     distance *= 100
+
+    GPIO.cleanup()
+
     return distance
 
 
 
 mytext = getDistance(TRIGI, ECHOI)
+mytext2 = getDistance(TRIGF, ECHOF)
+mytext3 = f"{mytext}\n{mytext2}"
 window = Tk()
-text = Label(window, text=mytext)
+text = Label(window, text=mytext3)
 text.pack()
 window.mainloop()
