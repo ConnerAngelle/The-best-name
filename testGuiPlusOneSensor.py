@@ -43,13 +43,11 @@ def getDistance(TRIG, ECHO):
     distance /= 2
     
     distance *= 100
-    
+
     return distance
 
-insideDist = int(getDistance(TRIGI, ECHOI))
-frontDist = int(getDistance(TRIGF, ECHOF))
-GPIO.cleanup()
-GPIO.setwarnings(False)
+insideDist = getDistance(TRIGI, ECHOI)
+frontDist = getDistance(TRIGF, ECHOF)
 mytext3 = ("{}\n{}".format(insideDist, frontDist))
 window = Tk()
 text = Label(window, text=mytext3)
