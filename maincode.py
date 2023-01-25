@@ -67,7 +67,9 @@ def servoDown(status, seconds):
 
 def singleScan(status):
     if(status == True):
-        return getDistance(TRIGI, ECHOI)
+        distance = getDistance(TRIGI, ECHOI)
+        Percent = calculatePrcnt(distance)
+        #send percent to GUI
 
 def calculatePrcnt(d):
     
