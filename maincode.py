@@ -59,6 +59,7 @@ def frontScan():
     # will take the distance from getDistance function and 
     # compare it to a specified value
     while True:
+        sleep(0.5)
         distance = getDistance(TRIGF, ECHOF)
         if(distance < 10):
             print("Open")
