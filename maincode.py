@@ -1,6 +1,7 @@
 # import our libraries
 import RPi.GPIO as GPIO
 from time import sleep, time
+from gpiozero import Servo
 
 # constants
 DEBUG = False
@@ -13,12 +14,13 @@ SPEED_OF_SOUND = 343 # speed of sound in m/s set the RPi to the Broadcom pin lay
 GPIO.setmode(GPIO.BCM)
 
 #pins for front
-global TRIGF, ECHOF, TRIGI, ECHOI
+global TRIGF, ECHOF, TRIGI, ECHOI, servo
 TRIGF = 18
 ECHOF = 27
 #pins for inside
 TRIGI = 22
 ECHOI = 25
+servo = Servo(12)
 
 # Functions
 def calibrate(TRIG, ECHO):
@@ -57,13 +59,18 @@ def frontScan():
             print("Close")
 
 def servoDown(status, seconds):
-    # if status == True:
-    # move servo to proper angle
-    # sleep(seconds)
-    # move servo back up
-    # return True
-    "singleScan(True)"
-    pass
+    if(status == True):
+        servo.min()
+        sleep(2)
+        servo.mid()
+        sleep(2)
+        servo.max()
+        sleep(seconds)
+        singleScan(True)
+        # move servo to proper angle
+        # sleep(seconds)
+        # move servo back up
+        # return True
 
 def singleScan(status):
     if(status == True):
