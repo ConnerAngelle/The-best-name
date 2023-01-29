@@ -63,19 +63,17 @@ def frontScan():
         distance = getDistance(TRIGF, ECHOF)
         if(distance < 10):
             print("Open")
-            servoDown(True, 1)
+            servoDown(True, 3)
+            
         else:
             print("Close")
 
 def servoDown(status, seconds):
     if(status == True):
         servo.min()
-        sleep(2)
-        servo.mid()
-        sleep(2)
+        sleep(seconds)
         servo.max()
         sleep(seconds)
-        singleScan(True)
         # move servo to proper angle
         # sleep(seconds)
         # move servo back up
