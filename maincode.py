@@ -70,10 +70,12 @@ def frontScan():
 
 def servoDown(status, seconds):
     if(status == True):
-        servo.min()
-        sleep(seconds)
         servo.max()
         sleep(seconds)
+        servo.min()
+        sleep(seconds)
+        p, d = singleScan()
+        showGui(p,d)
         # move servo to proper angle
         # sleep(seconds)
         # move servo back up
@@ -108,7 +110,7 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
+servo.min()
 frontScan()
-p, d = singleScan()
-showGui(p,d)
+
 
