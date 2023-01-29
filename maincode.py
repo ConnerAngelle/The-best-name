@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 from time import sleep, time
 from gpiozero import Servo
+from tkinter import *
 
 # constants
 DEBUG = False
@@ -53,7 +54,6 @@ def getDistance(TRIG, ECHO):
     #GPIO.cleanup()
     
     return distance
-    
 
 def frontScan():
     # will take the distance from getDistance function and 
@@ -84,12 +84,19 @@ def servoDown(status, seconds):
 def singleScan(status):
     if(status == True):
         distance = getDistance(TRIGI, ECHOI)
-        Percent = calculatePrcnt(distance)
+        percent = 100*(23 - distance)/23
         #send percent to GUI
 
-def calculatePrcnt(d):
+#def calculatePrcnt(d):
     
-    pass
+ #   pass
+
+def showGui(insideDist):
+    myText = ("{}".format(insideDist))
+    window = Tk()
+    text = Label(window, text=myText)
+    text.pack()
+    window.mainloop()
 
 ## overall ideas:
 # front sensor will read constantly and as soon as it receives a distance of less than 10 cm
@@ -108,6 +115,5 @@ def calculatePrcnt(d):
 calibrate(TRIGF, ECHOF)
 calibrate(TRIGI, ECHOI)
 d = singleScan(True)
-calculatePrcnt(d)
+showGui(d)
 
-frontScan()
