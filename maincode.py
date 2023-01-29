@@ -75,15 +75,18 @@ def frontScan():
 def servoDown(status, seconds):
     if(status == True):
         servo.min()
-        #showGui(p,d)
+        sleep(seconds)
         servo.max()
+        sleep(seconds)
+        p, d = singleScan()
+        showGui(p,d)
+        
         # move servo to proper angle
         # sleep(seconds)
         # move servo back up
         # return True
         sleep(seconds)
-        q, e = singleScan()
-        return q, e 
+        
 
 #function to get the distance from the inside sensor
 #and returns the distance and a percent for how full
@@ -101,11 +104,9 @@ def singleScan():
 def showGui(percent, insideDist):
     myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
     window = Tk()
-    text = Label(window, width = 800, height = 600, text=myText, font = ("Playbill", 36))
+    text = Label(window, width = 600, height = 400, text=myText, font = ("Playbill", 36))
     text.pack()
     window.mainloop()
-    servo.max()
-    frontScan()
 
 ## overall ideas:
 # front sensor will read constantly and as soon as it receives a distance of less than 10 cm
@@ -123,8 +124,8 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
-p, d = singleScan()
-showGui(p,d)
+servo.max()
+frontScan()
 
 
 
