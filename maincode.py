@@ -32,6 +32,7 @@ GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
 def calibrate(TRIG, ECHO):
     pass
 
+#function to get the distance from one of the two sensors
 def getDistance(TRIG, ECHO):
     # will return a single distance
     GPIO.output(TRIG, GPIO.HIGH)
@@ -61,6 +62,8 @@ def frontScan():
     while True:
         sleep(0.5)
         distance = getDistance(TRIGF, ECHOF)
+        #checks distance from front sensor see if something is close to
+        #it and tells the servo to open
         if(distance < 10):
             print("Open")
             servoDown(True, 3)
@@ -68,6 +71,7 @@ def frontScan():
         else:
             print("Close")
 
+#function to open the trash can using the servo
 def servoDown(status, seconds):
     if(status == True):
         servo.min()
@@ -81,12 +85,19 @@ def servoDown(status, seconds):
         # move servo back up
         # return True
 
+#function to get the distance from the inside sensor
+#and returns the distance and a percent for how full
+#the trash can is
 def singleScan():
     distance = getDistance(TRIGI, ECHOI)
+    #percent based on the distance from the sensor based on the total
+    #distance of an empty trash can
     percent = 100*(24.5 - distance)/24.5
     return percent, distance
     #send percent to GUI
 
+#GUI that shows a percent of how full the trash can is
+#and the distance between the trash and the sensor
 def showGui(percent, insideDist):
     myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(percent, insideDist))
     window = Tk()
