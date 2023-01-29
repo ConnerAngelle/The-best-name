@@ -108,6 +108,7 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
+frontScan()
 p, d = singleScan()
 showGui(p,d)
 
