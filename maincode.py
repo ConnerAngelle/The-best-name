@@ -71,15 +71,15 @@ def frontScan():
 def servoDown(status, seconds):
     if(status == True):
         servo.min()
-        sleep(seconds)
+        #showGui(p,d)
         servo.max()
-        sleep(seconds)
-        p, d = singleScan()
-        showGui(p,d)
         # move servo to proper angle
         # sleep(seconds)
         # move servo back up
         # return True
+        sleep(seconds)
+        q, e = singleScan()
+        return q, e 
 
 def singleScan():
     distance = getDistance(TRIGI, ECHOI)
@@ -88,9 +88,9 @@ def singleScan():
     #send percent to GUI
 
 def showGui(percent, insideDist):
-    myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(percent, insideDist))
+    myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
     window = Tk()
-    text = Label(window, text=myText)
+    text = Label(window, width = 800, height = 600, text=myText, font = ("Playbill", 36))
     text.pack()
     window.mainloop()
 
@@ -110,6 +110,8 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
+p, d = singleScan()
+showGui(p,d)
 servo.max()
 frontScan()
 
