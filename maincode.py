@@ -104,6 +104,8 @@ def showGui(percent, insideDist):
     text = Label(window, width = 800, height = 600, text=myText, font = ("Playbill", 36))
     text.pack()
     window.mainloop()
+    servo.max()
+    frontScan()
 
 ## overall ideas:
 # front sensor will read constantly and as soon as it receives a distance of less than 10 cm
@@ -123,7 +125,6 @@ def showGui(percent, insideDist):
 #calibrate(TRIGI, ECHOI)
 p, d = singleScan()
 showGui(p,d)
-servo.max()
-frontScan()
+
 
 
