@@ -81,18 +81,14 @@ def servoDown(status, seconds):
         # move servo back up
         # return True
 
-def singleScan(status):
-    if(status == True):
-        distance = getDistance(TRIGI, ECHOI)
-        percent = 100*(23 - distance)/23
-        #send percent to GUI
+def singleScan():
+    distance = getDistance(TRIGI, ECHOI)
+    percent = 100*(23 - distance)/23
+    return percent, distance
+    #send percent to GUI
 
-#def calculatePrcnt(d):
-    
- #   pass
-
-def showGui(insideDist):
-    myText = ("{}".format(insideDist))
+def showGui(percent, insideDist):
+    myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(percent, insideDist))
     window = Tk()
     text = Label(window, text=myText)
     text.pack()
@@ -112,8 +108,8 @@ def showGui(insideDist):
 
 
 ## Main Program
-calibrate(TRIGF, ECHOF)
-calibrate(TRIGI, ECHOI)
-d = singleScan(True)
-showGui(d)
+#calibrate(TRIGF, ECHOF)
+#calibrate(TRIGI, ECHOI)
+p, d = singleScan()
+showGui(p,d)
 
