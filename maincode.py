@@ -74,9 +74,9 @@ def frontScan():
 #function to open the trash can using the servo
 def servoDown(status, seconds):
     if(status == True):
-        servo.min()
-        sleep(seconds)
         servo.max()
+        sleep(seconds)
+        servo.min()
         sleep(seconds)
         p, d = singleScan()
         showGui(p,d)
@@ -124,7 +124,7 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
-servo.max()
+servo.min()
 frontScan()
 
 
