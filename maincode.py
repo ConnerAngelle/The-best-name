@@ -104,8 +104,10 @@ def singleScan():
 def showGui(percent, insideDist):
     myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
     window = Tk()
-    text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 36))
+    text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
     text.pack()
+    button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
+    button.pack(fill = 'both', expand=True)
     window.mainloop()
 
 ## overall ideas:
