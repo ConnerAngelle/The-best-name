@@ -95,7 +95,9 @@ def singleScan():
     distance = getDistance(TRIGI, ECHOI)
     #percent based on the distance from the sensor based on the total
     #distance of an empty trash can
-    percent = 100*(24.5 - distance)/24.5
+    percent = 100*(24.2 - distance)/24.2
+    if percent <= 0:
+        percent = 0
     return percent, distance
     #send percent to GUI
 
