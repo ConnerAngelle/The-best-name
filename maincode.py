@@ -41,7 +41,7 @@ class Trash(Frame):
                        between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
-            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
+            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
             button.pack(side = BOTTOM)
             window.after(1000, window.quit)
             window.mainloop()
