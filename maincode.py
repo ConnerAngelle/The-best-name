@@ -37,11 +37,12 @@ class Trash(Frame):
     def setupGUI(self):
         while True:
             percent, insideDist = self.singleScan()
-            myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
+            myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap\
+                       between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
-            text.pack()
-            #button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
-            #button.pack(fill = 'both', expand=True)
+            text.pack(side = TOP)
+            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
+            button.pack(side = BOTTOM)
             window.after(1000, window.quit)
             window.mainloop()
             self.frontScan()
@@ -103,9 +104,11 @@ class Trash(Frame):
         distance = self.getDistance(TRIGI, ECHOI)
         #percent based on the distance from the sensor based on the total
         #distance of an empty trash can
-        percent = 100*(24.2 - distance)/24.2
+        percent = 100*(22 - distance)/22
         if percent <= 0:
             percent = 0
+        if distance >= 22:
+            distance = 22
         return percent, distance
 
 
