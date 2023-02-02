@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from time import sleep, time
 from gpiozero import Servo
 from tkinter import *
-
+        
 # constants
 DEBUG = False
 SETTLE_TIME = 2   # seconds to let the sensor settle
@@ -28,89 +28,88 @@ GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
 GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
 GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
 
-# Functions
-def calibrate(TRIG, ECHO):
-    pass
-
-#function to get the distance from one of the two sensors
-def getDistance(TRIG, ECHO):
-    # will return a single distance
-    GPIO.output(TRIG, GPIO.HIGH)
-    sleep(TRIGGER_TIME)
-    GPIO.output(TRIG, GPIO.LOW)
-
-    while (GPIO.input(ECHO) == GPIO.LOW):
-        start = time()
-    while (GPIO.input(ECHO) == GPIO.HIGH):
-        end = time()
-
-    duration = end - start
-
-    distance = duration * SPEED_OF_SOUND
-
-    distance /= 2
-    
-    distance *= 100
-
-    #GPIO.cleanup()
-    
-    return distance
-
-def frontScan():
-    # will take the distance from getDistance function and 
-    # compare it to a specified value
-    while True:
-        sleep(0.5)
-        distance = getDistance(TRIGF, ECHOF)
-        #checks distance from front sensor see if something is close to
-        #it and tells the servo to open
-        if(distance < 10):
-            print("Open")
-            servoDown(True, 3)
-            
-        else:
-            print("Close")
-
-#function to open the trash can using the servo
-def servoDown(status, seconds):
-    if(status == True):
-        servo.max()
-        sleep(seconds)
-        servo.min()
-        sleep(seconds)
-        p, d = singleScan()
-        showGui(p,d)
+class Trash(Frame):
+    def __init__(self, parent):
+        Frame.__init__(self, parent, bg = "white")
+        parent.attributes("-fullscreen", True)
+        self.setupGUI()
         
-        # move servo to proper angle
-        # sleep(seconds)
-        # move servo back up
-        # return True
-        sleep(seconds)
+    def setupGUI(self):
+        while True:
+            percent, insideDist = self.singleScan()
+            myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
+            text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
+            text.pack()
+            #button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
+            #button.pack(fill = 'both', expand=True)
+            window.after(1000, window.quit)
+            window.mainloop()
+            self.frontScan()
+            text.destroy()
+
+    #function to get the distance from one of the two sensors
+    def getDistance(self, TRIG, ECHO):
+        # will return a single distance
+        GPIO.output(TRIG, GPIO.HIGH)
+        sleep(TRIGGER_TIME)
+        GPIO.output(TRIG, GPIO.LOW)
+
+        while (GPIO.input(ECHO) == GPIO.LOW):
+            start = time()
+        while (GPIO.input(ECHO) == GPIO.HIGH):
+            end = time()
+
+        duration = end - start
+
+        distance = duration * SPEED_OF_SOUND
+
+        distance /= 2
         
+        distance *= 100
 
-#function to get the distance from the inside sensor
-#and returns the distance and a percent for how full
-#the trash can is
-def singleScan():
-    distance = getDistance(TRIGI, ECHOI)
-    #percent based on the distance from the sensor based on the total
-    #distance of an empty trash can
-    percent = 100*(24.2 - distance)/24.2
-    if percent <= 0:
-        percent = 0
-    return percent, distance
-    #send percent to GUI
+        #GPIO.cleanup()
+        
+        return distance
 
-#GUI that shows a percent of how full the trash can is
-#and the distance between the trash and the sensor
-def showGui(percent, insideDist):
-    myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap between the trash and the lid.".format(int(percent), int(insideDist)))
-    window = Tk()
-    text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
-    text.pack()
-    button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = exit)
-    button.pack(fill = 'both', expand=True)
-    window.mainloop()
+    def frontScan(self):
+        # will take the distance from getDistance function and 
+        # compare it to a specified value
+        running = True
+        while(running == True):
+            sleep(0.5)
+            distance = self.getDistance(TRIGF, ECHOF)
+            #checks distance from front sensor see if something is close to
+            #it and tells the servo to open
+            if(distance < 10):
+                print("Open")
+                self.servoDown(True, 3)
+                running = False
+                
+            else:
+                print("Close")
+
+    #function to open the trash can using the servo
+    def servoDown(self, status, seconds):
+        if(status == True):
+            servo.min()
+            sleep(seconds)
+            servo.max()
+            sleep(seconds)
+
+    #function to get the distance from the inside sensor
+    #and returns the distance and a percent for how full
+    #the trash can is
+    def singleScan(self):
+        distance = self.getDistance(TRIGI, ECHOI)
+        #percent based on the distance from the sensor based on the total
+        #distance of an empty trash can
+        percent = 100*(24.2 - distance)/24.2
+        if percent <= 0:
+            percent = 0
+        return percent, distance
+
+
+
 
 ## overall ideas:
 # front sensor will read constantly and as soon as it receives a distance of less than 10 cm
@@ -128,8 +127,8 @@ def showGui(percent, insideDist):
 ## Main Program
 #calibrate(TRIGF, ECHOF)
 #calibrate(TRIGI, ECHOI)
-servo.min()
-frontScan()
+window = Tk()
+p = Trash(window)
 
 
 
