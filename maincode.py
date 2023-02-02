@@ -48,7 +48,7 @@ class Trash(Frame):
             text.destroy()
 
     #function to get the distance from one of the two sensors
-    def getDistance(TRIG, ECHO):
+    def getDistance(self, TRIG, ECHO):
         # will return a single distance
         GPIO.output(TRIG, GPIO.HIGH)
         sleep(TRIGGER_TIME)
@@ -89,7 +89,7 @@ class Trash(Frame):
                 print("Close")
 
     #function to open the trash can using the servo
-    def servoDown(status, seconds):
+    def servoDown(self, status, seconds):
         if(status == True):
             servo.min()
             sleep(seconds)
