@@ -15,7 +15,7 @@ SPEED_OF_SOUND = 343 # speed of sound in m/s set the RPi to the Broadcom pin lay
 GPIO.setmode(GPIO.BCM)
 
 #pins for front
-global TRIGF, ECHOF, TRIGI, ECHOI, servo
+global TRIGF, ECHOF, TRIGI, ECHOI, servo, button
 TRIGF = 18
 ECHOF = 27
 #pins for inside
