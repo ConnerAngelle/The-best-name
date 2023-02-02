@@ -23,10 +23,13 @@ TRIGI = 22
 ECHOI = 25
 servo = Servo(12)
 
+button = 5
+
 GPIO.setup(TRIGF, GPIO.OUT) # TRIG is an output
 GPIO.setup(ECHOF, GPIO.IN) # ECHO is an input
 GPIO.setup(TRIGI, GPIO.OUT) # TRIG is an output
 GPIO.setup(ECHOI, GPIO.IN) # ECHO is an input
+GPIO.setup(button, GPIO.IN) # button is an input
 
 class Trash(Frame):
     def __init__(self, parent):
@@ -41,8 +44,10 @@ class Trash(Frame):
                        between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
-            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
-            button.pack(side = BOTTOM)
+            #button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
+            #button.pack(side = BOTTOM)
+            if (GPIO.input(button) == GPIO.HIGH):
+                window.destroy()
             window.after(1000, window.quit)
             window.mainloop()
             self.frontScan()
