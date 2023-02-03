@@ -102,10 +102,12 @@ class Trash(Frame):
     #function to open the trash can using the servo
     def servoDown(self, status, seconds):
         if(status == True):
-            servo.min()
-            sleep(seconds)
             servo.max()
             sleep(seconds)
+            for i in range(10)
+            servo.value = 1-((i+1)*0.2)
+            sleep(0.75)
+             
 
     #function to get the distance from the inside sensor
     #and returns the distance and a percent for how full
