@@ -36,6 +36,9 @@ class Trash(Frame):
         Frame.__init__(self, parent, bg = "white")
         parent.attributes("-fullscreen", True)
         self.setupGUI()
+    
+    def close(self):
+        window.destroy()
         
     def setupGUI(self):
         while True:
@@ -46,7 +49,7 @@ class Trash(Frame):
             #           between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
-            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
+            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = close(self))
             button.pack(side = BOTTOM)
             if (GPIO.input(button) == GPIO.HIGH):
                 window.destroy()
