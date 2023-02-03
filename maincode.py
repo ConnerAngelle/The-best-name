@@ -105,10 +105,9 @@ class Trash(Frame):
         if(status == True):
             servo.value = 0.2
             sleep(seconds)
-            for i in range(6):
-                servo.value = 0.2-((i+1)*0.2)
+            while (servo.value > -1):
+                servo.value -= 0.2
                 sleep(0.75)
-             
 
     #function to get the distance from the inside sensor
     #and returns the distance and a percent for how full
