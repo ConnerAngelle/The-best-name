@@ -104,9 +104,9 @@ class Trash(Frame):
         if(status == True):
             servo.max()
             sleep(seconds)
-            for i in range(10)
-            servo.value = 1-((i+1)*0.2)
-            sleep(0.75)
+            for i in range(10):
+                servo.value = 1-((i+1)*0.2)
+                sleep(0.75)
              
 
     #function to get the distance from the inside sensor
