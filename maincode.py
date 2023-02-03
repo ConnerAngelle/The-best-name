@@ -49,7 +49,7 @@ class Trash(Frame):
             #           between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
-            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = close(self))
+            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = self.close())
             button.pack(side = BOTTOM)
             if (GPIO.input(button) == GPIO.HIGH):
                 window.destroy()
