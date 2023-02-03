@@ -40,12 +40,14 @@ class Trash(Frame):
     def setupGUI(self):
         while True:
             percent, insideDist = self.singleScan()
-            myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap\
-                       between the trash and the lid.".format(int(percent), int(insideDist)))
+            myText = ("The trash can is {} percent full".format(int(percent)))
+
+            #myText = ("The trash can is {} percent full. That is, there\nis a {} cm gap\
+            #           between the trash and the lid.".format(int(percent), int(insideDist)))
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
-            #button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
-            #button.pack(side = BOTTOM)
+            button = Button(window, width = 400, height = 200, text = "Exit", font = ("Playbill", 16), command = window.destroy())
+            button.pack(side = BOTTOM)
             if (GPIO.input(button) == GPIO.HIGH):
                 window.destroy()
             window.after(1000, window.quit)
