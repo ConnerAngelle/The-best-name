@@ -41,6 +41,7 @@ class Trash(Frame):
         window.destroy()
         
     def setupGUI(self):
+        servo.min()
         while True:
             percent, insideDist = self.singleScan()
             myText = ("The trash can is {} percent full".format(int(percent)))
@@ -105,7 +106,7 @@ class Trash(Frame):
             servo.value = 0.4
             sleep(seconds)
             for i in range(7):
-                servo.value = 1-((i+1)*0.2)
+                servo.value = 0.4-((i+1)*0.2)
                 sleep(0.75)
              
 
