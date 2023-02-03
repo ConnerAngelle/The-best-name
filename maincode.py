@@ -103,10 +103,10 @@ class Trash(Frame):
     #function to open the trash can using the servo
     def servoDown(self, status, seconds):
         if(status == True):
-            servo.value = 0.4
+            servo.value = 0.2
             sleep(seconds)
-            for i in range(7):
-                servo.value = 0.4-((i+1)*0.2)
+            for i in range(6):
+                servo.value = 0.2-((i+1)*0.2)
                 sleep(0.75)
              
 
