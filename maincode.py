@@ -34,6 +34,9 @@ class Trash(Frame):
         parent.attributes("-fullscreen", True)
         # call the setupGUI function to run the main program
         self.setupGUI()
+
+    def reset(self):
+        quit()
     
     # a GUI-based function that the entire program flows through
     def setupGUI(self):
@@ -45,16 +48,18 @@ class Trash(Frame):
             # and display it to the GUI
             percent = self.singleScan()
             myText = ("The trash can is {} percent full".format(int(percent)))
-            text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
-            text.pack(side = TOP)
+            text = Label(window, text=myText, font = ("Playbill", 16))
+            text.pack(side = TOP, pady = 100)
 
-            exitButton = Button(window, text = "Exit")
-            exitButton.pack(side = BOTTOM)
-
+            exitButton = Button(window, text = "Exit", command = self.reset)
+            exitButton.pack(side = BOTTOM, pady = 100)
+        
             # display the window while allowing the program to run
             # in the background
-            window.after(1000, window.quit)
-            window.mainloop()
+            #window.after(1000, window.quit)
+            #window.mainloop()
+
+            window.update_idletasks()
 
             # check how close the nearest object is to the
             # front of the trash can
