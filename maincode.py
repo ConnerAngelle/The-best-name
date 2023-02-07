@@ -103,8 +103,8 @@ class Trash(Frame):
         if(status == True):
             servo.value = 0
             sleep(seconds)
-            # loops with a delay to allow the servo to turn back
-            # up while the lever slowly rises back up
+            #loops with a delay to allow the servo to turn back
+            #up while the lever slowly rises back up
             while (servo.value > -1):
                 servo.value -= 0.2
                 sleep(0.75)
