@@ -48,6 +48,9 @@ class Trash(Frame):
             text = Label(window, width = 400, height = 200, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP)
 
+            exitButton = Button(window, text = "Exit")
+            exitButton.pack(side = BOTTOM)
+
             # display the window while allowing the program to run
             # in the background
             window.after(1000, window.quit)
