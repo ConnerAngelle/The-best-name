@@ -106,8 +106,6 @@ class Trash(Frame):
                 # make the servo go down for 5 seconds
                 self.servoDown(True, 5)
                 running = False
-            else:
-                #print("Close")
 
     # function to open the trash can using the servo
     def servoDown(self, status, seconds):
