@@ -33,13 +33,22 @@ class Trash(Frame):
         # make the window fullscreen
         parent.attributes("-fullscreen", True)
         # call the setupGUI function to run the main program
-        self.setupGUI()
+        self.setupGUI(0)
 
-    def reset(self):
-        quit()
+    def Quit(self):
+        global count)
+        window.destroy()
+        count = 1
     
     # a GUI-based function that the entire program flows through
-    def setupGUI(self):
+    def setupGUI(self, c):
+        global count
+        count = c
+        print(count)
+        exitButton = Button(window, text = "Exit",\
+                            command = lambda: self.Quit())
+        exitButton.pack(side = BOTTOM, pady = 100)
+
         # set the servo to its starting position
         servo.min()
         # run indefinitely
@@ -50,21 +59,12 @@ class Trash(Frame):
             myText = ("The trash can is {} percent full".format(int(percent)))
             text = Label(window, text=myText, font = ("Playbill", 16))
             text.pack(side = TOP, pady = 100)
-
-            exitButton = Button(window, text = "Exit", command = self.reset)
-            exitButton.pack(side = BOTTOM, pady = 100)
-        
-            # display the window while allowing the program to run
-            # in the background
-            #window.after(1000, window.quit)
-            #window.mainloop()
-
-            window.update_idletasks()
-
+            window.update()
             # check how close the nearest object is to the
             # front of the trash can
             self.frontScan()
-
+            if(count == 1):
+                break
             # reset the text on the GUI
             text.destroy()
 
@@ -88,16 +88,19 @@ class Trash(Frame):
         return distance
     # search for a close object forever, and open the trash can when found
     def frontScan(self):
+        global count
         # takes the distance from getDistance function and 
         # compares it to a specified value
         running = True
         while(running == True):
             sleep(0.5)
             distance = self.getDistance(TRIGF, ECHOF)
+            if(count == 1):
+                break
 
             # checks distance from front sensor see if something is close to
             # it and tells the servo to open
-            if(distance < 10):
+            elif(distance < 10):
                 print("Open")
                 # make the servo go down for 5 seconds
                 self.servoDown(True, 5)
