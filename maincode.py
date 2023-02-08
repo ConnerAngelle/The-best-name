@@ -95,6 +95,7 @@ class Trash(Frame):
         while(running == True):
             sleep(0.5)
             distance = self.getDistance(TRIGF, ECHOF)
+            window.update()
             if(count == 1):
                 break
 
