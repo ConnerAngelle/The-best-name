@@ -110,13 +110,14 @@ class Trash(Frame):
     def servoDown(self, status, seconds):
         # makes the servo turn to push down the lever
         if(status == True):
-            servo.value = 0.4
+            servo.value = 0.2
             sleep(seconds)
             #loops with a delay to allow the servo to turn back
             #up while the lever slowly rises back up
             while (servo.value > -1):
                 servo.value -= 0.2
                 sleep(0.75)
+            sleep(1.5)
 
     # function to get the distance from the inside sensor
     # and returns the percent for how full
