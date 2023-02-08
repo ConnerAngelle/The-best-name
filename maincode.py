@@ -102,12 +102,12 @@ class Trash(Frame):
             # checks distance from front sensor see if something is close to
             # it and tells the servo to open
             elif(distance < 10):
-                print("Open")
+                #print("Open")
                 # make the servo go down for 5 seconds
                 self.servoDown(True, 5)
                 running = False
             else:
-                print("Close")
+                #print("Close")
 
     # function to open the trash can using the servo
     def servoDown(self, status, seconds):
