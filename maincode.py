@@ -36,15 +36,14 @@ class Trash(Frame):
         self.setupGUI(0)
 
     def Quit(self):
-        global count
+        global buttonPressed
         window.destroy()
-        count = 1
+        buttonPressed = 1
     
     # a GUI-based function that the entire program flows through
     def setupGUI(self, c):
-        global count
-        count = c
-        print(count)
+        global buttonPressed
+        buttonPressed = c
         exitButton = Button(window, text = "Exit",\
                             command = lambda: self.Quit())
         exitButton.pack(side = BOTTOM, pady = 100)
@@ -63,7 +62,7 @@ class Trash(Frame):
             # check how close the nearest object is to the
             # front of the trash can
             self.frontScan()
-            if(count == 1):
+            if(buttonPressed == 1):
                 break
             # reset the text on the GUI
             text.destroy()
@@ -88,7 +87,7 @@ class Trash(Frame):
         return distance
     # search for a close object forever, and open the trash can when found
     def frontScan(self):
-        global count
+        global buttonPressed
         # takes the distance from getDistance function and 
         # compares it to a specified value
         running = True
@@ -96,7 +95,7 @@ class Trash(Frame):
             sleep(0.5)
             distance = self.getDistance(TRIGF, ECHOF)
             window.update()
-            if(count == 1):
+            if(buttonPressed == 1):
                 break
 
             # checks distance from front sensor see if something is close to
