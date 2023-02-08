@@ -36,7 +36,7 @@ class Trash(Frame):
         self.setupGUI(0)
 
     def Quit(self):
-        global count)
+        global count
         window.destroy()
         count = 1
     
