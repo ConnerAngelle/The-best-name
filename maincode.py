@@ -47,7 +47,7 @@ class Trash(Frame):
         openButton.destroy()
         closeButton = Button(window, text = "Close",\
                              command = lambda: self.close(closeButton, text))
-        closeButton.pack(side = BOTTOM, anchor = "e", padx = 100)
+        closeButton.pack(side = RIGHT, anchor = "e", padx = 100)
         servo.value = 0.3
         while(ocPressed == 0):
             window.update()
@@ -61,7 +61,7 @@ class Trash(Frame):
         closeButton.destroy()
         openButton = Button(window, text = "Open",\
                             command = lambda: self.stayOpen(openButton, text))
-        openButton.pack(side = BOTTOM, anchor = "e", padx = 100)
+        openButton.pack(side = RIGHT, anchor = "e", padx = 100)
         sleep(1.5)
         text.destroy()
         percent = self.singleScan()
@@ -77,12 +77,12 @@ class Trash(Frame):
         buttonPressed = c
         exitButton = Button(window, text = "Exit",\
                             command = lambda: self.Quit())
-        exitButton.pack(side = BOTTOM, anchor = "w", padx = 100, pady = 100)
+        exitButton.pack(side = LEFT, anchor = "w", padx = 100)
 
         #button to keep the lid open
         openButton = Button(window, text = "Open",\
                             command = lambda: self.stayOpen(openButton, text))
-        openButton.pack(side = BOTTOM, anchor = "e", padx = 100)
+        openButton.pack(side = RIGHT, anchor = "e", padx = 100)
 
         # set the servo to its starting position
         servo.min()
