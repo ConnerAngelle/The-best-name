@@ -77,7 +77,7 @@ class Trash(Frame):
         buttonPressed = c
         exitButton = Button(window, text = "Exit",\
                             width = 10, height = 2, command = lambda: self.Quit())
-        exitButton.pack(side = BOTTOM, anchor = "s", padx = 100, pady = 50)
+        exitButton.pack(side = BOTTOM, anchor = "s", padx = 100, pady = 75)
 
         #button to keep the lid open
         openButton = Button(window, text = "Open",\
