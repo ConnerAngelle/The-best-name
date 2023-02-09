@@ -49,7 +49,7 @@ class Trash(Frame):
                              command = lambda: self.close(closeButton))
         closeButton.pack(side = BOTTOM, anchor = "e")
         servo.value = 0.3
-        while True:
+        while(ocPressed == 0):
             window.update()
         
     
