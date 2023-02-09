@@ -39,6 +39,25 @@ class Trash(Frame):
         global buttonPressed
         window.destroy()
         buttonPressed = 1
+
+    #funtion to keep the lid open
+    def stayOpen(self, openButton):
+        openButton.destroy()
+        closeButton = Button(window, text = "Close",\
+                             command = lambda: self.close(closeButton))
+        closeButton.pack(side = BOTTOM, pady = 100)
+        servo.value = 0.2
+        while True:
+            window.update()
+        
+    
+    def close(self, closeButton):
+        while(servo.value > -1):
+            servo.value -= 0.2
+            sleep(0.75)
+        closeButton.destroy()
+        sleep(0.5)
+        self.setupGUI(0)
     
     # a GUI-based function that the entire program flows through
     def setupGUI(self, c):
@@ -47,6 +66,11 @@ class Trash(Frame):
         exitButton = Button(window, text = "Exit",\
                             command = lambda: self.Quit())
         exitButton.pack(side = BOTTOM, pady = 100)
+
+        #button to keep the lid open
+        openButton = Button(window, text = "Open",\
+                            command = lambda: self.stayOpen(openButton))
+        openButton.pack(side = BOTTOM, pady = 100)
 
         # set the servo to its starting position
         servo.min()
