@@ -63,6 +63,7 @@ class Trash(Frame):
                             command = lambda: self.stayOpen(openButton))
         openButton.pack(side = BOTTOM, anchor = "e")
         sleep(1.5)
+        text.destroy()
         percent = self.singleScan()
         myText = ("The trash can is {} percent full".format(int(percent)))
         text = Label(window, text=myText, font = ("Playbill", 16))
