@@ -60,7 +60,7 @@ class Trash(Frame):
             sleep(0.75)
         closeButton.destroy()
         openButton = Button(window, text = "Open",\
-                            command = lambda: self.stayOpen(openButton))
+                            command = lambda: self.stayOpen(openButton, text))
         openButton.pack(side = BOTTOM, anchor = "e")
         sleep(1.5)
         text.destroy()
