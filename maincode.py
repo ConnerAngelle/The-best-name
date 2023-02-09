@@ -41,19 +41,19 @@ class Trash(Frame):
         buttonPressed = 1
 
     #funtion to keep the lid open
-    def stayOpen(self, openButton):
+    def stayOpen(self, openButton, text):
         global ocPressed
         ocPressed = 0
         openButton.destroy()
         closeButton = Button(window, text = "Close",\
-                             command = lambda: self.close(closeButton))
+                             command = lambda: self.close(closeButton, text))
         closeButton.pack(side = BOTTOM, anchor = "e")
         servo.value = 0.3
         while(ocPressed == 0):
             window.update()
         
     
-    def close(self, closeButton):
+    def close(self, closeButton, text):
         global ocPressed
         while(servo.value > -0.9):
             servo.value -= 0.2
@@ -80,7 +80,7 @@ class Trash(Frame):
 
         #button to keep the lid open
         openButton = Button(window, text = "Open",\
-                            command = lambda: self.stayOpen(openButton))
+                            command = lambda: self.stayOpen(openButton, text))
         openButton.pack(side = BOTTOM, anchor = "e")
 
         # set the servo to its starting position
