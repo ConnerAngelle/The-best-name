@@ -62,7 +62,12 @@ class Trash(Frame):
         openButton = Button(window, text = "Open",\
                             command = lambda: self.stayOpen(openButton))
         openButton.pack(side = BOTTOM, anchor = "e")
-        sleep(0.5)
+        sleep(1.5)
+        text.destroy()
+        percent = self.singleScan()
+        myText = ("The trash can is {} percent full".format(int(percent)))
+        text = Label(window, text=myText, font = ("Playbill", 16))
+        text.pack(side = TOP, pady = 100)
         ocPressed = 1
     
     # a GUI-based function that the entire program flows through
