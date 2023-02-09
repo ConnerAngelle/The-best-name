@@ -9,31 +9,46 @@ class Trash(Frame):
         parent.attributes("-fullscreen", True)
         self.setupGUI()
 
+    def Quit(self):
+        global buttonPressed
+        window.destroy()
+        buttonPressed = 1
+
     def setupGUI(self):
+        exitButton = Button(window, text = "Exit",\
+                            command = lambda: self.Quit())
+        exitButton.pack(side = BOTTOM, anchor = "w")
         openButton = Button(window, text = "Open",\
                             command = lambda: self.stayOpen(openButton))
-        openButton.pack(side = TOP, pady = 100)
+        openButton.pack(side = BOTTOM, anchor = "e")
         while True:
             window.update()
+            print("u")
 
     def stayOpen(self, openButton):
+        global ocPressed
+        ocPressed = 0
         openButton.destroy()
         closeButton = Button(window, text = "Close",\
                              command = lambda: self.close(closeButton))
-        closeButton.pack(side = TOP, pady = 100)
+        closeButton.pack(side = BOTTOM, anchor = "e")
         #servo.value = 0.2
         sleep(0.5)
-        while True:
+        while(ocPressed == 0):
             window.update()
             print("Open")
 
     def close(self, closeButton):
+        global ocPressed
         #while(servo.value > -1):
             #servo.value -= 0.2
             #sleep(0.75)
         closeButton.destroy()
+        openButton = Button(window, text = "Open",\
+                            command = lambda: self.stayOpen(openButton))
+        openButton.pack(side = BOTTOM, anchor = "e")
         sleep(0.5)
-        self.setupGUI()
+        ocPressed = 1
 
 
 window = Tk()
