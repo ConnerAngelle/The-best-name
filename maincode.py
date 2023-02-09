@@ -42,6 +42,8 @@ class Trash(Frame):
 
     #funtion to keep the lid open
     def stayOpen(self, openButton):
+        global ocPressed
+        ocPressed = 0
         openButton.destroy()
         closeButton = Button(window, text = "Close",\
                              command = lambda: self.close(closeButton))
@@ -52,12 +54,16 @@ class Trash(Frame):
         
     
     def close(self, closeButton):
+        global ocPressed
         while(servo.value > -0.9):
             servo.value -= 0.2
             sleep(0.75)
         closeButton.destroy()
+        openButton = Button(window, text = "Open",\
+                            command = lambda: self.stayOpen(openButton))
+        openButton.pack(side = BOTTOM, anchor = "e")
         sleep(0.5)
-        self.setupGUI(0)
+        ocPressed = 1
     
     # a GUI-based function that the entire program flows through
     def setupGUI(self, c):
