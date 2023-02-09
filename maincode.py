@@ -74,6 +74,7 @@ class Trash(Frame):
 
         # set the servo to its starting position
         servo.min()
+        sleep(0.5)
         # run indefinitely
         while True:
             # find the percentage of the trash can that is full
