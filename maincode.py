@@ -151,7 +151,7 @@ class Trash(Frame):
         distance = self.getDistance(TRIGI, ECHOI)
         #percent based on the distance from the sensor based on the total
         #distance of an empty trash can
-        percent = 100*(21.5 - distance)/21.5
+        percent = 100*(22.5 - distance)/22.5
         if percent <= 0:
             percent = 0
         return percent
